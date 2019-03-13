@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="JSONPlaceholderSample.Pages.UsersPage"
+                xmlns:pages="clr-namespace:JSONPlaceholderSample.Pages;assembly=JSONPlaceholderSample"
+                xmlns:templates="clr-namespace:JSONPlaceholderSample.DataTemplateSelectors;assembly=JSONPlaceholderSample"
+                xmlns:helpers="clr-namespace:JSONPlaceholderSample.Helpers;assembly=JSONPlaceholderSample"
+                Title="{x:Static helpers:ConstantHelper.UsersPageTitle}">
+    
+    <pages:BasePage.Resources>
+        <ResourceDictionary>
+            <templates:UsersIdTemplateSelector x:Key="UsersIdTemplateSelector"/>
+        </ResourceDictionary>
+    </pages:BasePage.Resources>
+
+    <pages:BasePage.Content>
+            <ListView ItemsSource="{Binding Users}"
+                      ItemTemplate="{StaticResource UsersIdTemplateSelector}"
+                      HasUnevenRows="True"
+                      SeparatorColor="Transparent">
+            </ListView>
+    </pages:BasePage.Content>
+</pages:BasePage>

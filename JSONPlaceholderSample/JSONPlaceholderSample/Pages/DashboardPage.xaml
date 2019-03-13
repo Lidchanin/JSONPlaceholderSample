@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="JSONPlaceholderSample.Pages.DashboardPage"
+                xmlns:pages="clr-namespace:JSONPlaceholderSample.Pages;assembly=JSONPlaceholderSample"
+                xmlns:helpers="clr-namespace:JSONPlaceholderSample.Helpers;assembly=JSONPlaceholderSample"
+                Title="{x:Static helpers:ConstantHelper.DashboardPageTitle}">
+
+    <pages:BasePage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Frame CornerRadius="5" 
+                   BackgroundColor="SteelBlue">
+                <FlexLayout Direction="Column">
+                    <FlexLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped" 
+                                              NumberOfTapsRequired="1"/>
+                    </FlexLayout.GestureRecognizers>
+
+                    <Label Text="Users"/>
+                </FlexLayout>
+            </Frame>
+        </Grid>
+    </pages:BasePage.Content>
+</pages:BasePage>

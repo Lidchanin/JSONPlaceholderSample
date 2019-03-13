@@ -1,11 +1,12 @@
-﻿using System;
+﻿using JSONPlaceholderSample.Helpers;
+using JSONPlaceholderSample.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace JSONPlaceholderSample
 {
-    public partial class App : Application
+    public partial class App
     {
         public App()
         {
@@ -16,12 +17,12 @@ namespace JSONPlaceholderSample
 
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new DashboardPage());
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            ConnectivityHelper.InitConnectionStatus();
         }
 
         protected override void OnSleep()

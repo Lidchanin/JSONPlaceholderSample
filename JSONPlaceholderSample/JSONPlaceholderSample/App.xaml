@@ -3,6 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="JSONPlaceholderSample.App">
     <Application.Resources>
+        <ResourceDictionary>
 
+            <!--#region Colors-->
+            <Color x:Key="DarkColor">#484848</Color>
+            <Color x:Key="LightColor">#FFFFFF</Color>
+            <Color x:Key="BlurLightColor">#FDEBE7</Color>
+            <Color x:Key="RedColor">#F0513C</Color>
+            <Color x:Key="PurpleColor">#D183FD</Color>
+            <Color x:Key="GreenColor">#8EE269</Color>
+            <!--#endregion-->
+
+            <!--#region Label styles-->
+            <Style x:Key="DarkSmallLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
+                <Setter Property="FontSize" Value="Small"/>
+            </Style>
+
+            <Style x:Key="LightSmallLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightColor}"/>
+                <Setter Property="FontSize" Value="Small"/>
+            </Style>
+
+            <Style x:Key="DarkShortSmallTruncationLabelStyle" TargetType="Label" BasedOn="{StaticResource DarkSmallLabelStyle}">
+                <Setter Property="LineBreakMode" Value="TailTruncation"/>
+                <Setter Property="MaxLines" Value="1"/>
+            </Style>
+
+            <Style x:Key="DarkLongSmallWrapLabelStyle" TargetType="Label" BasedOn="{StaticResource DarkSmallLabelStyle}">
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="MaxLines" Value="3"/>
+            </Style>
+
+            <Style x:Key="LightShortSmallTruncationLabelStyle" TargetType="Label" BasedOn="{StaticResource LightSmallLabelStyle}">
+                <Setter Property="LineBreakMode" Value="TailTruncation"/>
+                <Setter Property="MaxLines" Value="1"/>
+            </Style>
+
+            <Style x:Key="LightLongSmallWrapLabelStyle" TargetType="Label" BasedOn="{StaticResource LightSmallLabelStyle}">
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="MaxLines" Value="3"/>
+            </Style>
+            <!--#endregion-->
+
+            <!--#region Frame styles-->
+            <Style x:Key="SimpleCornerFrameStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="5"/>
+            </Style>
+            <!--#endregion-->
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
