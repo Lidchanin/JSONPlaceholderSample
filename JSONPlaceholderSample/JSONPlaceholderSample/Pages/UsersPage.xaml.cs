@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using JSONPlaceholderSample.Services;
+﻿using JSONPlaceholderSample.Models;
 using JSONPlaceholderSample.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace JSONPlaceholderSample.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UsersPage
 	{
 	    private readonly UsersPageViewModel _viewModel;
@@ -29,5 +24,10 @@ namespace JSONPlaceholderSample.Pages
 	        base.OnAppearing();
 	        await _viewModel.InitData();
 	    }
-	}
+
+	    private async void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+	    {
+	        await Navigation.PushAsync(new UserDetailPage((User) e.SelectedItem), true);
+        }
+    }
 }

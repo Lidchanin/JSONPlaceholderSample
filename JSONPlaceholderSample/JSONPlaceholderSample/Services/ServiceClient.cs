@@ -1,4 +1,5 @@
-﻿using JSONPlaceholderSample.Helpers;
+﻿using Acr.UserDialogs;
+using JSONPlaceholderSample.Helpers;
 using JSONPlaceholderSample.Models;
 using Newtonsoft.Json;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
 
 namespace JSONPlaceholderSample.Services
 {
@@ -32,6 +32,21 @@ namespace JSONPlaceholderSample.Services
         public async Task<List<User>> GetUsers()
         {
             return await GetAsync<List<User>>("users");
+        }
+
+        public async Task<int> GetAlbumsCountForCurrentUser(int userId)
+        {
+            return (await GetAsync<List<Album>>($"albums?userId={userId}")).Count;
+        }
+
+        public async Task<int> GetPostsCountForCurrentUser(int userId)
+        {
+            return (await GetAsync<List<Post>>($"posts?userId={userId}")).Count;
+        }
+
+        public async Task<int> GetTodosCountForCurrentUser(int userId)
+        {
+            return (await GetAsync<List<Todo>>($"todos?userId={userId}")).Count;
         }
 
         private async Task<T> GetAsync<T>(string url) where T : new()
@@ -64,6 +79,7 @@ namespace JSONPlaceholderSample.Services
             {
                 _userDialog.Alert(ex.Message);
             }
+
             return new T();
         }
     }

@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:image="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+                xmlns:controls="clr-namespace:JSONPlaceholderSample.Controls;assembly=JSONPlaceholderSample"
+                xmlns:helpers="clr-namespace:JSONPlaceholderSample.Helpers;assembly=JSONPlaceholderSample"
+                xmlns:pages="clr-namespace:JSONPlaceholderSample.Pages;assembly=JSONPlaceholderSample"
+                xmlns:system="clr-namespace:System;assembly=mscorlib"
+                x:Class="JSONPlaceholderSample.Pages.UserDetailPage"
+                Title="{Binding User.Username}">
+
+    <pages:BasePage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="InfoSectionWithImageStyle" TargetType="controls:InfoSectionWithImage">
+                <Setter Property="SummaryTextColor" Value="{StaticResource BlurDarkColor}"/>
+                <Setter Property="SummaryTextFontSize" Value="Micro"/>
+                <Setter Property="DetailsTextColor" Value="{StaticResource DarkColor}"/>
+                <Setter Property="DetailsTextFontSize" Value="Small"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="BackgroundColor" Value="{Binding Source={x:Reference MainView}, Path=BackgroundColor}"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="CornerRadius" Value="7"/>
+            </Style>
+
+            <Style x:Key="ShortInfoLabelStyle" TargetType="Label"
+                   BasedOn="{StaticResource DarkSmallWrapLabelStyle}">
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="DescriptionSpanStyle" TargetType="Span">
+                <Setter Property="FontSize" Value="Micro"/>
+                <Setter Property="TextColor" Value="{StaticResource BlurDarkColor}"/>
+            </Style>
+        </ResourceDictionary>
+    </pages:BasePage.Resources>
+
+    <pages:BasePage.Content>
+        <ScrollView>
+            <Grid x:Name="MainView" 
+                  ColumnSpacing="0" 
+                  RowSpacing="0"
+                  BackgroundColor="{StaticResource LightColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--#region Background image-->
+                <Image Source="{x:Static helpers:ConstantHelper.DefaultProfileBackgroundImage}" 
+                       Aspect="AspectFill"
+                       Grid.Row="0"/>
+                <Image Source="{x:Static helpers:ConstantHelper.CurvedMaskImage}" 
+                       VerticalOptions="End" 
+                       Aspect="AspectFill" 
+                       Margin="0,0,0,-1"
+                       Grid.Row="0"/>
+                <!--#endregion-->
+
+                <!--#region Profile icon-->
+                <image:CircleImage Source="{x:Static helpers:ConstantHelper.DefaultUserIcon}" 
+                                   Margin="0,0,0,-50" 
+                                   HeightRequest="100" 
+                                   WidthRequest="100" 
+                                   BorderThickness="3"
+                                   FillColor="{StaticResource BlurLightColor}"
+                                   BorderColor="{Binding Source={x:Reference MainView}, 
+                                                         Path=BackgroundColor}"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="End"
+                                   Grid.Row="0"/>
+                <!--#endregion-->
+
+                <!--#region Username-->
+                    <Label Text="{Binding User.Username}"
+                           Style="{StaticResource DarkMediumWrapLabelStyle}"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center"
+                           Grid.Row="1" 
+                           Margin="0,50,0,0" />
+                <!--#endregion-->
+
+                <!--#region Short info-->
+                <Grid Grid.Row="2" 
+                      ColumnSpacing="0" 
+                      RowSpacing="0" 
+                      Margin="0,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="PostsLabel" Style="{StaticResource ShortInfoLabelStyle}"
+                           Grid.Column="0">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding PostsCount}" FontAttributes="Bold"/>
+                                <Span Text="{x:Static system:Environment.NewLine}"/>
+                                <Span Text="{x:Static helpers:ConstantHelper.Posts}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="PostsLabel_OnTapped" 
+                                                  NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding PostsCount}" Value="0">
+                                <Setter Property="Label.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Label x:Name="AlbumsLabel" 
+                           Style="{StaticResource ShortInfoLabelStyle}"
+                           Grid.Column="1">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding AlbumsCount}" FontAttributes="Bold"/>
+                                <Span Text="{x:Static system:Environment.NewLine}"/>
+                                <Span Text="{x:Static helpers:ConstantHelper.Albums}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="AlbumsLabel_OnTapped" 
+                                                  NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding AlbumsCount}" Value="0">
+                                <Setter Property="Label.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+
+                    <Label x:Name="TodosLabel" 
+                           Style="{StaticResource ShortInfoLabelStyle}"
+                           Grid.Column="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding TodosCount}" FontAttributes="Bold"/>
+                                <Span Text="{x:Static system:Environment.NewLine}"/>
+                                <Span Text="{x:Static helpers:ConstantHelper.Todos}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TodosLabel_OnTapped"
+                                                  NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding TodosCount}" Value="0">
+                                <Setter Property="Label.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Full info-->
+                <Frame CornerRadius="5" 
+                       Margin="5" 
+                       Padding="0"
+                       HasShadow="False"
+                       Grid.Row="3">
+                    <FlexLayout Direction="Column"
+                            AlignItems="Stretch"
+                            JustifyContent="SpaceEvenly"
+                            BackgroundColor="{StaticResource BlurLightColor}"
+                            Padding="5">
+                        <Frame CornerRadius="5" 
+                               Margin="5,3,0,10"
+                               Padding="3"
+                               HasShadow="False"
+                               FlexLayout.AlignSelf="Start"
+                               BackgroundColor="{Binding Source={x:Reference MainView}, Path=BackgroundColor}">
+                            <Label Text="{x:Static helpers:ConstantHelper.FullInformation}" 
+                                   Style="{StaticResource BlurDarkSmallTruncationLabelStyle}"/>
+                        </Frame>
+                        <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.NameIcon}" 
+                                                   SummaryText="{x:Static helpers:ConstantHelper.Name}"
+                                                   DetailsText="{Binding User.Name}"
+                                                   Style="{StaticResource InfoSectionWithImageStyle}"/>
+                        <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.PhoneIcon}" 
+                                                   SummaryText="{x:Static helpers:ConstantHelper.Phone}"
+                                                   DetailsText="{Binding User.Phone}"
+                                                   Style="{StaticResource InfoSectionWithImageStyle}"/>
+                        <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.EmailIcon}" 
+                                                   SummaryText="{x:Static helpers:ConstantHelper.Email}"
+                                                   DetailsText="{Binding User.Email}"
+                                                   Style="{StaticResource InfoSectionWithImageStyle}"/>
+                        <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.WebsiteIcon}" 
+                                                   SummaryText="{x:Static helpers:ConstantHelper.Website}"
+                                                   DetailsText="{Binding User.Website}"
+                                                   Style="{StaticResource InfoSectionWithImageStyle}"/>
+                        <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.CompanyIcon}" 
+                                                   SummaryText="{x:Static helpers:ConstantHelper.Company}"
+                                                   Style="{StaticResource InfoSectionWithImageStyle}">
+                            <controls:InfoSectionWithImage.DetailsFormattedText>
+                                <FormattedString>
+                                    <Span Text="Name: " Style="{StaticResource DescriptionSpanStyle}"/>
+                                    <Span Text="{Binding User.Company.Name}"/>
+                                    <Span Text="{x:Static system:Environment.NewLine}"/>
+
+                                    <Span Text="Bs: " Style="{StaticResource DescriptionSpanStyle}"/>
+                                    <Span Text="{Binding User.Company.Bs}"/>
+                                    <Span Text="{x:Static system:Environment.NewLine}"/>
+
+                                    <Span Text="Catch phrase: " Style="{StaticResource DescriptionSpanStyle}"/>
+                                    <Span Text="{Binding User.Company.CatchPhrase}"/>
+                                </FormattedString>
+                            </controls:InfoSectionWithImage.DetailsFormattedText>
+                        </controls:InfoSectionWithImage>
+                        <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.LocationIcon}" 
+                                                   SummaryText="{x:Static helpers:ConstantHelper.Address}"
+                                                   Style="{StaticResource InfoSectionWithImageStyle}">
+                            <controls:InfoSectionWithImage.DetailsFormattedText>
+                                <FormattedString>
+                                    <Span Text="City: " Style="{StaticResource DescriptionSpanStyle}"/>
+                                    <Span Text="{Binding User.Address.City}"/>
+                                    <Span Text="{x:Static system:Environment.NewLine}"/>
+
+                                    <Span Text="Street: " Style="{StaticResource DescriptionSpanStyle}"/>
+                                    <Span Text="{Binding User.Address.Street}"/>
+                                    <Span Text="{x:Static system:Environment.NewLine}"/>
+
+                                    <Span Text="Suite: " Style="{StaticResource DescriptionSpanStyle}"/>
+                                    <Span Text="{Binding User.Address.Suite}"/>
+                                    <Span Text="{x:Static system:Environment.NewLine}"/>
+
+                                    <Span Text="Zipcode: " Style="{StaticResource DescriptionSpanStyle}"/>
+                                    <Span Text="{Binding User.Address.Zipcode}"/>
+                                </FormattedString>
+                            </controls:InfoSectionWithImage.DetailsFormattedText>
+                        </controls:InfoSectionWithImage>
+                    </FlexLayout>
+                </Frame>
+                <!--#endregion-->
+            </Grid>
+        </ScrollView>
+    </pages:BasePage.Content>
+</pages:BasePage>

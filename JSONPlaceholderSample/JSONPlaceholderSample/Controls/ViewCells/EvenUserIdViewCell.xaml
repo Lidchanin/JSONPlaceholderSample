@@ -17,13 +17,19 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label Text="{Binding Name}"
-                       Style="{StaticResource DarkLongSmallWrapLabelStyle}"
-                       FontAttributes="Bold"
+                <Label Style="{StaticResource DarkSmallWrapLabelStyle}"
                        HorizontalOptions="Center"
                        Grid.Column="0"
                        Grid.ColumnSpan="2"
-                       Grid.Row="0"/>
+                       Grid.Row="0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Username}"
+                                  FontAttributes="Bold"/>
+                            <Span Text="{Binding Name, StringFormat=' ({0})'}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
                 <Frame Style="{StaticResource SimpleCornerFrameStyle}"
                        BackgroundColor="{StaticResource RedColor}"
@@ -32,10 +38,10 @@
                        Grid.Row="1">
                     <StackLayout Orientation="Vertical">
                         <Label Text="{Binding Email}"
-                               Style="{StaticResource LightLongSmallWrapLabelStyle}"
+                               Style="{StaticResource LightSmallWrapLabelStyle}"
                                HorizontalTextAlignment="Center"/>
                         <Label Text="{Binding Website}"
-                               Style="{StaticResource LightLongSmallWrapLabelStyle}"
+                               Style="{StaticResource LightSmallWrapLabelStyle}"
                                HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </Frame>
@@ -57,7 +63,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Text="Company info: "
-                           Style="{StaticResource DarkShortSmallTruncationLabelStyle}"
+                           Style="{StaticResource DarkSmallTruncationLabelStyle}"
                            FontAttributes="Italic"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
@@ -68,27 +74,27 @@
                              Grid.ColumnSpan="2"
                              Grid.Row="1"/>
                     <Label Text="Name: "
-                           Style="{StaticResource DarkShortSmallTruncationLabelStyle}"
+                           Style="{StaticResource DarkSmallTruncationLabelStyle}"
                            Grid.Column="0"
                            Grid.Row="2"/>
                     <Label Text="{Binding Company.Name}" 
-                           Style="{StaticResource DarkShortSmallTruncationLabelStyle}"
+                           Style="{StaticResource DarkSmallTruncationLabelStyle}"
                            Grid.Column="1"
                            Grid.Row="2"/>
                     <Label Text="CatchPhrase: "
-                           Style="{StaticResource DarkShortSmallTruncationLabelStyle}"
+                           Style="{StaticResource DarkSmallTruncationLabelStyle}"
                            Grid.Column="0"
                            Grid.Row="3"/>
                     <Label Text="{Binding Company.CatchPhrase}" 
-                           Style="{StaticResource DarkShortSmallTruncationLabelStyle}"
+                           Style="{StaticResource DarkSmallTruncationLabelStyle}"
                            Grid.Column="1"
                            Grid.Row="3"/>
                     <Label Text="Bs: "
-                           Style="{StaticResource DarkShortSmallTruncationLabelStyle}"
+                           Style="{StaticResource DarkSmallTruncationLabelStyle}"
                            Grid.Column="0"
                            Grid.Row="4"/>
                     <Label Text="{Binding Company.Bs}"
-                           Style="{StaticResource DarkShortSmallTruncationLabelStyle}"
+                           Style="{StaticResource DarkSmallTruncationLabelStyle}"
                            Grid.Column="1"
                            Grid.Row="4"/>
                 </Grid>

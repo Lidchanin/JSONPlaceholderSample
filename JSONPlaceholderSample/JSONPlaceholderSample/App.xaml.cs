@@ -17,7 +17,7 @@ namespace JSONPlaceholderSample
 
             InitializeComponent();
 
-            MainPage = new NavigationPage(new DashboardPage());
+            MainPage = new NavigationPage(new UsersPage());
         }
 
         protected override void OnStart()

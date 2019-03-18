@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using JSONPlaceholderSample.Helpers;
+﻿using JSONPlaceholderSample.Helpers;
 using JSONPlaceholderSample.Models;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace JSONPlaceholderSample.ViewModels
 {

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONPlaceholderSample.Andro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONPlaceholderSample.iOS", "JSONPlaceholderSample\JSONPlaceholderSample.iOS\JSONPlaceholderSample.iOS.csproj", "{48FCF5F3-2D2C-4AE6-A162-DF20DF1A37CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONPlaceholderSample", "JSONPlaceholderSample\JSONPlaceholderSample\JSONPlaceholderSample.csproj", "{7DB4EEE9-FAF7-42F0-B801-A46F8465DDAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSONPlaceholderSample", "JSONPlaceholderSample\JSONPlaceholderSample\JSONPlaceholderSample.csproj", "{7DB4EEE9-FAF7-42F0-B801-A46F8465DDAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

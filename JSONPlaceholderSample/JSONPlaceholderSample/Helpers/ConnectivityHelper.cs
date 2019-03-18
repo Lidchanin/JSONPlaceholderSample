@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using JSONPlaceholderSample.Services;
-using Plugin.Connectivity;
+﻿using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Xamarin.Forms;
 
