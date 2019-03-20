@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+JSONPlaceholderSample/JSONPlaceholderSample.Android/Resources/Resource.designer.cs
+JSONPlaceholderSample/JSONPlaceholderSample.Android/Resources/Resource.designer.cs
+JSONPlaceholderSample/JSONPlaceholderSample.Android/Resources/Resource.designer.cs

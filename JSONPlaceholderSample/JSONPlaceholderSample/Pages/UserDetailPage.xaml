@@ -92,7 +92,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label x:Name="PostsLabel" Style="{StaticResource ShortInfoLabelStyle}"
+                    <Label Style="{StaticResource ShortInfoLabelStyle}"
                            Grid.Column="0">
                         <Label.FormattedText>
                             <FormattedString>
@@ -113,8 +113,7 @@
                         </Label.Triggers>
                     </Label>
 
-                    <Label x:Name="AlbumsLabel" 
-                           Style="{StaticResource ShortInfoLabelStyle}"
+                    <Label Style="{StaticResource ShortInfoLabelStyle}"
                            Grid.Column="1">
                         <Label.FormattedText>
                             <FormattedString>
@@ -135,8 +134,7 @@
                         </Label.Triggers>
                     </Label>
 
-                    <Label x:Name="TodosLabel" 
-                           Style="{StaticResource ShortInfoLabelStyle}"
+                    <Label Style="{StaticResource ShortInfoLabelStyle}"
                            Grid.Column="2">
                         <Label.FormattedText>
                             <FormattedString>

@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using ImageCircle.Forms.Plugin.Droid;
+using Plugin.CrossPlatformTintedImage.Android;
 
 namespace JSONPlaceholderSample.Droid
 {
@@ -22,6 +23,7 @@ namespace JSONPlaceholderSample.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             ImageCircleRenderer.Init();
+            TintedImageRenderer.Init();
             UserDialogs.Init(this);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 

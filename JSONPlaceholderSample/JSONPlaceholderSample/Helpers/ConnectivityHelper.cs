@@ -6,7 +6,8 @@ namespace JSONPlaceholderSample.Helpers
 {
     public static class ConnectivityHelper
     {
-        public const string TimeOutErrorMessage = "Timeout Expired";
+        public const string TimeOutErrorMessage = "Timeout expired";
+        public const string SomethingWentWrong = "Something went wrong";
         public const string ConnectionErrorMessage = "There is no access to the Internet. Check the connection";
 
         private const string IsConnected = "IsConnected";

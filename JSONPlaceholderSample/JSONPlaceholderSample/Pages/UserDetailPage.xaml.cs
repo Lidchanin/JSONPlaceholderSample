@@ -29,17 +29,17 @@ namespace JSONPlaceholderSample.Pages
 
         private async void PostsLabel_OnTapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PostsPage(_user.Id));
+            await Navigation.PushAsync(new PostsPage(_user));
         }
 
         private async void AlbumsLabel_OnTapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AlbumsPage(_user.Id));
+            await Navigation.PushAsync(new AlbumsPage(_user));
         }
 
         private async void TodosLabel_OnTapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new TodosPage(_user.Id));
+            await Navigation.PushAsync(new TodosPage(_user));
         }
     }
 }

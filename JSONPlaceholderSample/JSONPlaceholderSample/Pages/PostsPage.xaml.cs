@@ -1,17 +1,17 @@
-﻿using Xamarin.Forms;
+﻿using JSONPlaceholderSample.Models;
 using Xamarin.Forms.Xaml;
 
 namespace JSONPlaceholderSample.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PostsPage : ContentPage
-	{
+	public partial class PostsPage
+    {
 		public PostsPage ()
 		{
 			InitializeComponent ();
 		}
 
-	    public PostsPage(int userId)
+	    public PostsPage(User user)
 	    {
             InitializeComponent();
 	    }

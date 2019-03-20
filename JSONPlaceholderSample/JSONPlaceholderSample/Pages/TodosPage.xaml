@@ -1,12 +1,209 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="JSONPlaceholderSample.Pages.TodosPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:helpers="clr-namespace:JSONPlaceholderSample.Helpers;assembly=JSONPlaceholderSample"
+                xmlns:pages="clr-namespace:JSONPlaceholderSample.Pages;assembly=JSONPlaceholderSample"
+                xmlns:tinted="clr-namespace:Plugin.CrossPlatformTintedImage.Abstractions;assembly=Plugin.CrossPlatformTintedImage.Abstractions"
+                x:Class="JSONPlaceholderSample.Pages.TodosPage"
+                Title="{Binding PageTitle}">
+
+    <pages:BasePage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CurrentGridStyle" TargetType="Grid">
+                <Setter Property="ColumnSpacing" Value="0"/>
+                <Setter Property="RowSpacing" Value="0"/>
+            </Style>
+
+            <Style x:Key="CurrentBlurFrameStyle" TargetType="Frame"
+                   BasedOn="{StaticResource SimpleCornerFrameStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource BlurLightColor}"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+
+            <Style x:Key="CurrentFrameStyle" TargetType="Frame"
+                   BasedOn="{StaticResource SimpleCornerFrameStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightColor}"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+
+            <DataTemplate x:Key="ListItemTemplate">
+                <ViewCell>
+                    <FlexLayout Direction="Row"
+                                AlignContent="Center"
+                                Padding="2">
+                        <Label Text="{Binding Title}"
+                               Style="{StaticResource DarkSmallWrapLabelStyle}"
+                               VerticalTextAlignment="Center"
+                               Margin="0,0,2,0"
+                               FlexLayout.Basis="95%"/>
+
+                        <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.CheckedIcon}" 
+                                            TintColor="{StaticResource DarkColor}"
+                                            MinimumHeightRequest="20"
+                                            MinimumWidthRequest="20"
+                                            FlexLayout.Basis="5%"/>
+                    </FlexLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ListItemTemplateWithActions">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem IsDestructive="True" 
+                                  Text="Delete"
+                                  Clicked="MenuDelete_OnClicked"/>
+                    </ViewCell.ContextActions>
+
+                    <FlexLayout Direction="Row"
+                                AlignContent="Center"
+                                Padding="2">
+                        <Label Text="{Binding Title}"
+                               Style="{StaticResource DarkSmallWrapLabelStyle}"
+                               VerticalTextAlignment="Center"
+                               Margin="0,0,2,0"
+                               FlexLayout.Basis="95%"/>
+
+                        <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.CheckedIcon}" 
+                                            TintColor="{StaticResource BlurDarkColor}"
+                                            MinimumHeightRequest="20"
+                                            MinimumWidthRequest="20"
+                                            FlexLayout.Basis="5%"/>
+                    </FlexLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <Style x:Key="CurrentListViewStyle" TargetType="ListView">
+                <Setter Property="HasUnevenRows" Value="True"/>
+                <Setter Property="SeparatorVisibility" Value="None"/>
+            </Style>
+        </ResourceDictionary>
+    </pages:BasePage.Resources>
+
+    <pages:BasePage.Content>
+        <Grid Style="{StaticResource CurrentGridStyle}"
+              BackgroundColor="{StaticResource LightColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <!--#region Unfinished todos-->
+            <Frame Style="{StaticResource CurrentBlurFrameStyle}"
+                   Grid.Row="0">
+                <Frame Style="{StaticResource CurrentFrameStyle}"
+                       HasShadow="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <ListView ItemsSource="{Binding UnfinishedTodos}" 
+                                  ItemTemplate="{StaticResource ListItemTemplateWithActions}"
+                                  ItemSelected="Todo_OnItemSelected"
+                                  Style="{StaticResource CurrentListViewStyle}">
+                            <ListView.Footer>
+                                <FlexLayout Direction="Row"
+                                            AlignContent="Center">
+                                    <Entry Text="{Binding NewTodoText}" 
+                                           Style="{StaticResource DarkSmallEntryStyle}"
+                                           Margin="0,0,2,0"
+                                           FlexLayout.Basis="95%"/>
+
+                                    <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.PlusCircleIcon}" 
+                                                        IsEnabled="{Binding IsChangeEnabled}"
+                                                        TintColor="{StaticResource DarkColor}"
+                                                        MinimumHeightRequest="20"
+                                                        MinimumWidthRequest="20"
+                                                        FlexLayout.Basis="5%">
+                                        <tinted:TintedImage.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="AddButton_OnTapped"
+                                                                  NumberOfTapsRequired="1"/>
+                                        </tinted:TintedImage.GestureRecognizers>
+                                    </tinted:TintedImage>
+                                </FlexLayout>
+                            </ListView.Footer>
+                            <ListView.Triggers>
+                                <DataTrigger TargetType="ListView"
+                                             Binding="{Binding UnfinishedTodos.Count}" Value="0">
+                                    <Setter Property="ListView.IsVisible" Value="False"/>
+                                </DataTrigger>
+                            </ListView.Triggers>
+                        </ListView>
+
+                        <!--#region Empty state-->
+                        <StackLayout Orientation="Vertical"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     IsVisible="False">
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout"
+                                             Binding="{Binding UnfinishedTodos.Count}" Value="0">
+                                    <Setter Property="StackLayout.IsVisible" Value="True"/>
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+
+                            <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.EmptyStateImage}"
+                                                TintColor="{StaticResource DarkColor}"/>
+
+                            <Label Text="{x:Static helpers:ConstantHelper.NoUnfinishedTodos}"
+                                   Style="{StaticResource DarkMediumWrapLabelStyle}"
+                                   HorizontalTextAlignment="Center"/>
+
+                            <FlexLayout Direction="Row"
+                                        HorizontalOptions="CenterAndExpand">
+                                <Entry Text="{Binding NewTodoText}"
+                                       Placeholder="{x:Static helpers:ConstantHelper.CreateTodo}"
+                                       Style="{StaticResource DarkSmallEntryStyle}"
+                                       Margin="0,0,2,0"
+                                       FlexLayout.Basis="95%"/>
+
+                                <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.PlusCircleIcon}" 
+                                                    IsEnabled="{Binding IsChangeEnabled}"
+                                                    TintColor="{StaticResource DarkColor}"
+                                                    MinimumHeightRequest="20"
+                                                    MinimumWidthRequest="20"
+                                                    FlexLayout.Basis="5%">
+                                    <tinted:TintedImage.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="AddButton_OnTapped"
+                                                              NumberOfTapsRequired="1"/>
+                                    </tinted:TintedImage.GestureRecognizers>
+                                </tinted:TintedImage>
+                            </FlexLayout>
+                        </StackLayout>
+                        <!--#endregion-->
+                    </Grid>
+                </Frame>
+            </Frame>
+
+            <!--#region Completed todos-->
+            <Frame Style="{StaticResource CurrentBlurFrameStyle}" 
+                   Grid.Row="1">
+                <Grid Style="{StaticResource CurrentGridStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame Style="{StaticResource CurrentFrameStyle}"
+                           HorizontalOptions="Start"
+                           Grid.Row="0">
+                        <Label Text="{x:Static helpers:ConstantHelper.CompletedTodos}"/>
+                    </Frame>
+
+                    <Frame Style="{StaticResource CurrentFrameStyle}"
+                           HasShadow="True"
+                           Grid.Row="1">
+                        <ListView ItemsSource="{Binding CompletedTodos}" 
+                                  ItemTemplate="{StaticResource ListItemTemplate}"
+                                  ItemSelected="Todo_OnItemSelected"
+                                  Style="{StaticResource CurrentListViewStyle}"/>
+                    </Frame>
+                </Grid>
+            </Frame>
+            <!--#endregion-->
+        </Grid>
+    </pages:BasePage.Content>
+</pages:BasePage>

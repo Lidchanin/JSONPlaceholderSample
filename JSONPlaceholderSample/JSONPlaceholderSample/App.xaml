@@ -65,6 +65,13 @@
             </Style>
             <!--#endregion-->
 
+            <!--#region Entry styles-->
+            <Style x:Key="DarkSmallEntryStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}"/>
+                <Setter Property="FontSize" Value="Small"/>
+            </Style>
+            <!--#endregion-->
+
             <!--#region Frame styles-->
             <Style x:Key="SimpleCornerFrameStyle" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="5"/>
