@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:converters="clr-namespace:JSONPlaceholderSample.Converters;assembly=JSONPlaceholderSample"
                 xmlns:helpers="clr-namespace:JSONPlaceholderSample.Helpers;assembly=JSONPlaceholderSample"
                 xmlns:pages="clr-namespace:JSONPlaceholderSample.Pages;assembly=JSONPlaceholderSample"
                 xmlns:tinted="clr-namespace:Plugin.CrossPlatformTintedImage.Abstractions;assembly=Plugin.CrossPlatformTintedImage.Abstractions"
@@ -100,7 +101,8 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <ListView ItemsSource="{Binding UnfinishedTodos}" 
+                        <ListView x:Name="UnfinishedTodosListView" 
+                                  ItemsSource="{Binding UnfinishedTodos}" 
                                   ItemTemplate="{StaticResource ListItemTemplateWithActions}"
                                   ItemSelected="Todo_OnItemSelected"
                                   Style="{StaticResource CurrentListViewStyle}">
@@ -137,13 +139,8 @@
                         <StackLayout Orientation="Vertical"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
-                                     IsVisible="False">
-                            <StackLayout.Triggers>
-                                <DataTrigger TargetType="StackLayout"
-                                             Binding="{Binding UnfinishedTodos.Count}" Value="0">
-                                    <Setter Property="StackLayout.IsVisible" Value="True"/>
-                                </DataTrigger>
-                            </StackLayout.Triggers>
+                                     IsVisible="{Binding Source={x:Reference UnfinishedTodosListView}, Path=IsVisible, 
+                                                         Converter={converters:ReverseBooleanConverter}}">
 
                             <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.EmptyStateImage}"
                                                 TintColor="{StaticResource DarkColor}"/>
@@ -177,6 +174,7 @@
                     </Grid>
                 </Frame>
             </Frame>
+            <!--#endregion-->
 
             <!--#region Completed todos-->
             <Frame Style="{StaticResource CurrentBlurFrameStyle}" 
@@ -196,10 +194,44 @@
                     <Frame Style="{StaticResource CurrentFrameStyle}"
                            HasShadow="True"
                            Grid.Row="1">
-                        <ListView ItemsSource="{Binding CompletedTodos}" 
-                                  ItemTemplate="{StaticResource ListItemTemplate}"
-                                  ItemSelected="Todo_OnItemSelected"
-                                  Style="{StaticResource CurrentListViewStyle}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <ListView x:Name="CompletedTodosListView" 
+                                      ItemsSource="{Binding CompletedTodos}" 
+                                      ItemTemplate="{StaticResource ListItemTemplate}"
+                                      ItemSelected="Todo_OnItemSelected"
+                                      Style="{StaticResource CurrentListViewStyle}">
+                                <ListView.Triggers>
+                                    <DataTrigger TargetType="ListView"
+                                                 Binding="{Binding CompletedTodos.Count}" Value="0">
+                                        <Setter Property="ListView.IsVisible" Value="False"/>
+                                    </DataTrigger>
+                                </ListView.Triggers>
+                            </ListView>
+
+                            <!--#region Empty state-->
+                            <FlexLayout Direction="Column"
+                                        JustifyContent="Center"
+                                        AlignItems="Center"
+                                        AlignContent="Center"
+                                        IsVisible="{Binding Source={x:Reference CompletedTodosListView}, Path=IsVisible, 
+                                                            Converter={converters:ReverseBooleanConverter}}">
+
+                                <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.EmptyStateImage}"
+                                                    TintColor="{StaticResource DarkColor}"/>
+
+                                <Label Text="{x:Static helpers:ConstantHelper.NoUnfinishedTodos}"
+                                       Style="{StaticResource DarkMediumWrapLabelStyle}"
+                                       HorizontalTextAlignment="Center"/>
+                            </FlexLayout>
+                            <!--#endregion-->
+                        </Grid>
                     </Frame>
                 </Grid>
             </Frame>
