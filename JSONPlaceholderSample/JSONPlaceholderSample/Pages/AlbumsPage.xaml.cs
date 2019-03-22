@@ -1,4 +1,6 @@
 ﻿using JSONPlaceholderSample.Models;
+using JSONPlaceholderSample.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace JSONPlaceholderSample.Pages
@@ -6,14 +8,36 @@ namespace JSONPlaceholderSample.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AlbumsPage
     {
+        private AlbumsPageViewModel _viewModel;
+
         public AlbumsPage ()
 		{
-			InitializeComponent ();
-		}
+		    _viewModel = new AlbumsPageViewModel();
+
+		    BindingContext = _viewModel;
+
+		    InitializeComponent();
+        }
 
 	    public AlbumsPage(User user)
 	    {
-            InitializeComponent();
-	    }
-	}
+	        _viewModel = new AlbumsPageViewModel(user);
+
+	        BindingContext = _viewModel;
+
+	        InitializeComponent();
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await _viewModel.InitData();
+        }
+
+        private void AlbumsListView_OnItemSelected_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

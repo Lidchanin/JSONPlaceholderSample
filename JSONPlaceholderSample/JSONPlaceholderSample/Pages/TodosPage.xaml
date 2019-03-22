@@ -188,7 +188,8 @@
                     <Frame Style="{StaticResource CurrentFrameStyle}"
                            HorizontalOptions="Start"
                            Grid.Row="0">
-                        <Label Text="{x:Static helpers:ConstantHelper.CompletedTodos}"/>
+                        <Label Text="{x:Static helpers:ConstantHelper.CompletedTodos}"
+                               Style="{StaticResource BlurDarkSmallTruncationLabelStyle}"/>
                     </Frame>
 
                     <Frame Style="{StaticResource CurrentFrameStyle}"

@@ -15,9 +15,13 @@ namespace JSONPlaceholderSample.Helpers
         public const string Ok = "OK";
 
         public const string Albums = "Albums";
+        public const string AllAlbums = "All Albums";
         public const string Todos = "Todos";
+        public const string AllTodos = "All Todos";
         public const string Posts = "Posts";
+        public const string AllPosts = "All Posts";
         public const string Users = "Users";
+        public const string AllUsers = "All Users";
         public const string Name = "Name";
         public const string Website = "Website";
         public const string Email = "Email";
@@ -30,6 +34,7 @@ namespace JSONPlaceholderSample.Helpers
         public const string TodoMustNotBeEmpty = "The todo must not be empty!";
         public const string CreateTodo = "Create new todo";
         public const string NoUnfinishedTodos = "No unfinished todos";
+        public const string NoAlbums = "No albums";
 
         #region Files names
 

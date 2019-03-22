@@ -22,7 +22,7 @@ namespace JSONPlaceholderSample.ViewModels
         public TodosPageViewModel()
         {
             _user = null;
-            PageTitle = ConstantHelper.Users;
+            PageTitle = ConstantHelper.AllTodos;
             IsChangeEnabled = true;
         }
 
