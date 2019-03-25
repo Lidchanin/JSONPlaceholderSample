@@ -4,7 +4,6 @@ namespace JSONPlaceholderSample.Models
 {
     public class Photo
     {
-
         [JsonProperty("albumId")]
         public int AlbumId { get; set; }
 

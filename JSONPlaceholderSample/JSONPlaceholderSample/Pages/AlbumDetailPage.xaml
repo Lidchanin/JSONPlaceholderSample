@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:pages="clr-namespace:JSONPlaceholderSample.Pages;assembly=JSONPlaceholderSample"
+                x:Class="JSONPlaceholderSample.Pages.AlbumDetailPage"
+                Title="{Binding PageTitle}">
+
+    <pages:BasePage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CurrentGridStyle" TargetType="Grid">
+                <Setter Property="ColumnSpacing" Value="0"/>
+                <Setter Property="RowSpacing" Value="0"/>
+            </Style>
+
+            <Style x:Key="CurrentBlurFrameStyle" TargetType="Frame"
+                   BasedOn="{StaticResource SimpleCornerFrameStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource BlurLightColor}"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+
+            <Style x:Key="CurrentFrameStyle" TargetType="Frame"
+                   BasedOn="{StaticResource SimpleCornerFrameStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightColor}"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+        </ResourceDictionary>
+    </pages:BasePage.Resources>
+
+    <pages:BasePage.Content>
+        <ScrollView>
+            <Frame Style="{StaticResource CurrentBlurFrameStyle}">
+                <Grid Style="{StaticResource CurrentGridStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame Style="{StaticResource CurrentFrameStyle}"
+                           HorizontalOptions="Start"
+                           Grid.Row="0">
+                        <Label Text="{Binding Album.Title}"
+                               Style="{StaticResource BlurDarkSmallWrapLabelStyle}"/>
+                    </Frame>
+
+                    <Frame Style="{StaticResource CurrentFrameStyle}"
+                           HasShadow="True"
+                           Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <FlexLayout x:Name="PhotosLayout" 
+                                        Direction="Row"
+                                        Wrap="Wrap"
+                                        JustifyContent="SpaceEvenly"
+                                        AlignItems="Center"
+                                        AlignContent="Start"/>
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Frame>
+        </ScrollView>
+    </pages:BasePage.Content>
+</pages:BasePage>

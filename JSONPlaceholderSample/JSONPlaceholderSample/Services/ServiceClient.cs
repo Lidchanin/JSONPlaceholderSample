@@ -99,6 +99,16 @@ namespace JSONPlaceholderSample.Services
             return await DeleteAsync($"{BaseUrl}todos?id={todo.Id}");
         }
 
+        public async Task<List<Photo>> GetPhotos()
+        {
+            return await GetAsync<List<Photo>>("photos");
+        }
+
+        public async Task<List<Photo>> GetPhotos(int albumId)
+        {
+            return await GetAsync<List<Photo>>($"photos?albumId={albumId}");
+        }
+
         #region Private methods
 
         private async Task<T> GetAsync<T>(string url) where T : new()

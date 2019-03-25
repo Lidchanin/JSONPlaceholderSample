@@ -1,4 +1,5 @@
-﻿using JSONPlaceholderSample.Helpers;
+﻿using System.Collections.Generic;
+using JSONPlaceholderSample.Helpers;
 using JSONPlaceholderSample.Models;
 using Plugin.Connectivity;
 using System.Collections.ObjectModel;
@@ -6,24 +7,19 @@ using System.Threading.Tasks;
 
 namespace JSONPlaceholderSample.ViewModels
 {
-    public class AlbumsPageViewModel : BaseViewModel
+    public class AlbumDetailPageViewModel : BaseViewModel
     {
         public string PageTitle { get; set; }
-        public ObservableCollection<Album> Albums { get; set; }
+
+        public ObservableCollection<Photo> Photos { get; set; }
+        public Album Album { get; set; }
 
         private bool _isInit;
-        private readonly User _user;
 
-        public AlbumsPageViewModel()
+        public AlbumDetailPageViewModel(Album album)
         {
-            _user = null;
-            PageTitle = ConstantHelper.AllAlbums;
-        }
-
-        public AlbumsPageViewModel(User user)
-        {
-            _user = user;
-            PageTitle = $"{_user.Username}'s albums";
+            Album = album;
+            PageTitle = album.Title;
         }
 
         public async Task InitData()
@@ -32,12 +28,10 @@ namespace JSONPlaceholderSample.ViewModels
             {
                 UserDialog.ShowLoading(ConstantHelper.Loading);
 
-                Albums = _user == null
-                    ? new ObservableCollection<Album>(await ApiService.GetAlbums())
-                    : new ObservableCollection<Album>(await ApiService.GetAlbums(_user.Id));
+                Photos = new ObservableCollection<Photo>(await ApiService.GetPhotos(Album.Id));
 
                 UserDialog.HideLoading();
-
+                
                 _isInit = true;
             }
             else
@@ -52,5 +46,7 @@ namespace JSONPlaceholderSample.ViewModels
                 };
             }
         }
+
+          
     }
 }

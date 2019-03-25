@@ -43,6 +43,11 @@
                 <Setter Property="MaxLines" Value="3"/>
             </Style>
 
+            <Style x:Key="BlurDarkSmallWrapLabelStyle" TargetType="Label"
+                   BasedOn="{StaticResource DarkSmallWrapLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource BlurDarkColor}"/>
+            </Style>
+
             <Style x:Key="DarkMediumWrapLabelStyle" TargetType="Label" 
                    BasedOn="{StaticResource DarkLabelStyle}">
                 <Setter Property="FontSize" Value="Medium"/>

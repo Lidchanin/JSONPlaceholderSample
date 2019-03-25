@@ -46,5 +46,9 @@ namespace JSONPlaceholderSample.Services
         /// <param name="todo"><see cref="Todo"/> to delete.</param>
         /// <returns>true if the delete was successful, false - wasn't</returns>
         Task<bool> DeleteTodo(Todo todo);
+
+        Task<List<Photo>> GetPhotos();
+
+        Task<List<Photo>> GetPhotos(int albumId);
     }
 }

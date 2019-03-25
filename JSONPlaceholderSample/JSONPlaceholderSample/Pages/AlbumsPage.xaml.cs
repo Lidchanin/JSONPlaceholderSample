@@ -6,26 +6,26 @@ using Xamarin.Forms.Xaml;
 namespace JSONPlaceholderSample.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AlbumsPage
+    public partial class AlbumsPage
     {
         private AlbumsPageViewModel _viewModel;
 
-        public AlbumsPage ()
-		{
-		    _viewModel = new AlbumsPageViewModel();
+        public AlbumsPage()
+        {
+            _viewModel = new AlbumsPageViewModel();
 
-		    BindingContext = _viewModel;
+            BindingContext = _viewModel;
 
-		    InitializeComponent();
+            InitializeComponent();
         }
 
-	    public AlbumsPage(User user)
-	    {
-	        _viewModel = new AlbumsPageViewModel(user);
+        public AlbumsPage(User user)
+        {
+            _viewModel = new AlbumsPageViewModel(user);
 
-	        BindingContext = _viewModel;
+            BindingContext = _viewModel;
 
-	        InitializeComponent();
+            InitializeComponent();
         }
 
         protected override async void OnAppearing()
@@ -35,9 +35,9 @@ namespace JSONPlaceholderSample.Pages
             await _viewModel.InitData();
         }
 
-        private void AlbumsListView_OnItemSelected_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void AlbumsListView_OnItemSelected_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            await Navigation.PushAsync(new AlbumDetailPage((Album) e.SelectedItem));
         }
     }
 }
