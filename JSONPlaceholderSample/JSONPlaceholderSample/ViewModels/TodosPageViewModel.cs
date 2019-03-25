@@ -95,6 +95,7 @@ namespace JSONPlaceholderSample.ViewModels
                 todo.Id = addedTodoId;
 
                 UnfinishedTodos.Add(todo);
+                NewTodoText = string.Empty;
 
                 UserDialog.HideLoading();
                 IsChangeEnabled = true;

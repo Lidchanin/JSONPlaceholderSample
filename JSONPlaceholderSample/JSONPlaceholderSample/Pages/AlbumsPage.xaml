@@ -4,29 +4,13 @@
                 xmlns:converters="clr-namespace:JSONPlaceholderSample.Converters;assembly=JSONPlaceholderSample"
                 xmlns:helpers="clr-namespace:JSONPlaceholderSample.Helpers;assembly=JSONPlaceholderSample"
                 xmlns:pages="clr-namespace:JSONPlaceholderSample.Pages;assembly=JSONPlaceholderSample"
+                xmlns:controls="clr-namespace:JSONPlaceholderSample.Controls;assembly=JSONPlaceholderSample"
                 xmlns:tinted="clr-namespace:Plugin.CrossPlatformTintedImage.Abstractions;assembly=Plugin.CrossPlatformTintedImage.Abstractions"
                 x:Class="JSONPlaceholderSample.Pages.AlbumsPage"
                 Title="{Binding PageTitle}">
 
     <pages:BasePage.Resources>
         <ResourceDictionary>
-            <Style x:Key="CurrentGridStyle" TargetType="Grid">
-                <Setter Property="ColumnSpacing" Value="0"/>
-                <Setter Property="RowSpacing" Value="0"/>
-            </Style>
-
-            <Style x:Key="CurrentBlurFrameStyle" TargetType="Frame"
-                   BasedOn="{StaticResource SimpleCornerFrameStyle}">
-                <Setter Property="BackgroundColor" Value="{StaticResource BlurLightColor}"/>
-                <Setter Property="HasShadow" Value="False"/>
-            </Style>
-
-            <Style x:Key="CurrentFrameStyle" TargetType="Frame"
-                   BasedOn="{StaticResource SimpleCornerFrameStyle}">
-                <Setter Property="BackgroundColor" Value="{StaticResource LightColor}"/>
-                <Setter Property="HasShadow" Value="False"/>
-            </Style>
-
             <Style x:Key="CurrentListViewStyle" TargetType="ListView">
                 <Setter Property="HasUnevenRows" Value="True"/>
                 <Setter Property="SeparatorVisibility" Value="None"/>
@@ -35,81 +19,64 @@
     </pages:BasePage.Resources>
 
     <pages:BasePage.Content>
-        <Frame Style="{StaticResource CurrentBlurFrameStyle}" 
-                   Grid.Row="1">
-            <Grid Style="{StaticResource CurrentGridStyle}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <controls:ViewWithTitle Title="{x:Static helpers:ConstantHelper.Albums}">
+            <controls:ViewWithTitle.ChildView>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <Frame Style="{StaticResource CurrentFrameStyle}"
-                       HorizontalOptions="Start"
-                       Grid.Row="0">
-                    <Label Text="{x:Static helpers:ConstantHelper.Albums}"
-                           Style="{StaticResource BlurDarkSmallTruncationLabelStyle}"/>
-                </Frame>
+                    <ListView x:Name="AlbumsListView" 
+                              ItemsSource="{Binding Albums}" 
+                              ItemSelected="AlbumsListView_OnItemSelected_OnItemSelected"
+                              Style="{StaticResource CurrentListViewStyle}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Vertical"
+                                                 Spacing="0">
+                                        <Label Text="{Binding Title}"
+                                               Style="{StaticResource DarkSmallWrapLabelStyle}"
+                                               Margin="5,10"
+                                               HorizontalOptions="StartAndExpand"
+                                               VerticalOptions="Center"/>
+                                        <BoxView Color="{StaticResource BlurLightColor}"
+                                                 HeightRequest="1"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 VerticalOptions="End"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Triggers>
+                            <DataTrigger TargetType="ListView"
+                                         Binding="{Binding Albums.Count}" Value="0">
+                                <Setter Property="ListView.IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </ListView.Triggers>
+                    </ListView>
 
-                <Frame Style="{StaticResource CurrentFrameStyle}"
-                       HasShadow="True"
-                       Grid.Row="1">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <ListView x:Name="AlbumsListView" 
-                                  ItemsSource="{Binding Albums}" 
-                                  ItemSelected="AlbumsListView_OnItemSelected_OnItemSelected"
-                                  Style="{StaticResource CurrentListViewStyle}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <StackLayout Orientation="Vertical"
-                                                     Spacing="0">
-                                            <Label Text="{Binding Title}"
-                                                   Style="{StaticResource DarkSmallWrapLabelStyle}"
-                                                   Margin="5,10"
-                                                   HorizontalOptions="StartAndExpand"
-                                                   VerticalOptions="Center"/>
-                                            <BoxView Color="{StaticResource BlurLightColor}"
-                                                     HeightRequest="1"
-                                                     HorizontalOptions="FillAndExpand"
-                                                     VerticalOptions="End"/>
-                                        </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            <ListView.Triggers>
-                                <DataTrigger TargetType="ListView"
-                                             Binding="{Binding Albums.Count}" Value="0">
-                                    <Setter Property="ListView.IsVisible" Value="False"/>
-                                </DataTrigger>
-                            </ListView.Triggers>
-                        </ListView>
-
-                        <!--#region Empty state-->
-                        <FlexLayout Direction="Column"
-                                    JustifyContent="Center"
-                                    AlignItems="Center"
-                                    AlignContent="Center"
-                                    IsVisible="{Binding Source={x:Reference AlbumsListView}, Path=IsVisible, 
+                    <!--#region Empty state-->
+                    <FlexLayout Direction="Column"
+                                JustifyContent="Center"
+                                AlignItems="Center"
+                                AlignContent="Center"
+                                IsVisible="{Binding Source={x:Reference AlbumsListView}, Path=IsVisible, 
                                                         Converter={converters:ReverseBooleanConverter}}">
 
-                            <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.EmptyStateImage}"
-                                                TintColor="{StaticResource DarkColor}"/>
+                        <tinted:TintedImage Source="{x:Static helpers:ConstantHelper.EmptyStateImage}"
+                                            TintColor="{StaticResource DarkColor}"/>
 
-                            <Label Text="{x:Static helpers:ConstantHelper.NoAlbums}"
-                                   Style="{StaticResource DarkMediumWrapLabelStyle}"
-                                   HorizontalTextAlignment="Center"/>
-                        </FlexLayout>
-                        <!--#endregion-->
-                    </Grid>
-                </Frame>
-            </Grid>
-        </Frame>
+                        <Label Text="{x:Static helpers:ConstantHelper.NoAlbums}"
+                               Style="{StaticResource DarkMediumWrapLabelStyle}"
+                               HorizontalTextAlignment="Center"/>
+                    </FlexLayout>
+                    <!--#endregion-->
+                </Grid>
+            </controls:ViewWithTitle.ChildView>
+        </controls:ViewWithTitle>
     </pages:BasePage.Content>
 </pages:BasePage>

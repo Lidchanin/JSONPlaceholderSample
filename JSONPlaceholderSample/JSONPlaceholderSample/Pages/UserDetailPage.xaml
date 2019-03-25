@@ -73,12 +73,12 @@
                 <!--#endregion-->
 
                 <!--#region Username-->
-                    <Label Text="{Binding User.Username}"
-                           Style="{StaticResource DarkMediumWrapLabelStyle}"
-                           HorizontalTextAlignment="Center"
-                           HorizontalOptions="Center"
-                           Grid.Row="1" 
-                           Margin="0,50,0,0" />
+                <Label Text="{Binding User.Username}"
+                       Style="{StaticResource DarkMediumWrapLabelStyle}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"
+                       Grid.Row="1" 
+                       Margin="0,50,0,0" />
                 <!--#endregion-->
 
                 <!--#region Short info-->
@@ -164,10 +164,10 @@
                        HasShadow="False"
                        Grid.Row="3">
                     <FlexLayout Direction="Column"
-                            AlignItems="Stretch"
-                            JustifyContent="SpaceEvenly"
-                            BackgroundColor="{StaticResource BlurLightColor}"
-                            Padding="5">
+                                AlignItems="Stretch"
+                                JustifyContent="SpaceEvenly"
+                                BackgroundColor="{StaticResource BlurLightColor}"
+                                Padding="5">
                         <Frame CornerRadius="5" 
                                Margin="5,3,0,10"
                                Padding="3"
@@ -178,24 +178,24 @@
                                    Style="{StaticResource BlurDarkSmallTruncationLabelStyle}"/>
                         </Frame>
                         <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.NameIcon}" 
-                                                   SummaryText="{x:Static helpers:ConstantHelper.Name}"
-                                                   DetailsText="{Binding User.Name}"
-                                                   Style="{StaticResource InfoSectionWithImageStyle}"/>
+                                                       SummaryText="{x:Static helpers:ConstantHelper.Name}"
+                                                       DetailsText="{Binding User.Name}"
+                                                       Style="{StaticResource InfoSectionWithImageStyle}"/>
                         <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.PhoneIcon}" 
-                                                   SummaryText="{x:Static helpers:ConstantHelper.Phone}"
-                                                   DetailsText="{Binding User.Phone}"
-                                                   Style="{StaticResource InfoSectionWithImageStyle}"/>
+                                                       SummaryText="{x:Static helpers:ConstantHelper.Phone}"
+                                                       DetailsText="{Binding User.Phone}"
+                                                       Style="{StaticResource InfoSectionWithImageStyle}"/>
                         <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.EmailIcon}" 
-                                                   SummaryText="{x:Static helpers:ConstantHelper.Email}"
-                                                   DetailsText="{Binding User.Email}"
-                                                   Style="{StaticResource InfoSectionWithImageStyle}"/>
+                                                       SummaryText="{x:Static helpers:ConstantHelper.Email}"
+                                                       DetailsText="{Binding User.Email}"
+                                                       Style="{StaticResource InfoSectionWithImageStyle}"/>
                         <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.WebsiteIcon}" 
-                                                   SummaryText="{x:Static helpers:ConstantHelper.Website}"
-                                                   DetailsText="{Binding User.Website}"
-                                                   Style="{StaticResource InfoSectionWithImageStyle}"/>
+                                                       SummaryText="{x:Static helpers:ConstantHelper.Website}"
+                                                       DetailsText="{Binding User.Website}"
+                                                       Style="{StaticResource InfoSectionWithImageStyle}"/>
                         <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.CompanyIcon}" 
-                                                   SummaryText="{x:Static helpers:ConstantHelper.Company}"
-                                                   Style="{StaticResource InfoSectionWithImageStyle}">
+                                                       SummaryText="{x:Static helpers:ConstantHelper.Company}"
+                                                       Style="{StaticResource InfoSectionWithImageStyle}">
                             <controls:InfoSectionWithImage.DetailsFormattedText>
                                 <FormattedString>
                                     <Span Text="Name: " Style="{StaticResource DescriptionSpanStyle}"/>
@@ -212,8 +212,8 @@
                             </controls:InfoSectionWithImage.DetailsFormattedText>
                         </controls:InfoSectionWithImage>
                         <controls:InfoSectionWithImage ImageSource="{x:Static helpers:ConstantHelper.LocationIcon}" 
-                                                   SummaryText="{x:Static helpers:ConstantHelper.Address}"
-                                                   Style="{StaticResource InfoSectionWithImageStyle}">
+                                                       SummaryText="{x:Static helpers:ConstantHelper.Address}"
+                                                       Style="{StaticResource InfoSectionWithImageStyle}">
                             <controls:InfoSectionWithImage.DetailsFormattedText>
                                 <FormattedString>
                                     <Span Text="City: " Style="{StaticResource DescriptionSpanStyle}"/>

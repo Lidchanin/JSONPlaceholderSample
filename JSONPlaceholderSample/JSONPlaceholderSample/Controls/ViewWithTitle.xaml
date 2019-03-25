@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JSONPlaceholderSample.Controls.ViewWithTitle"
+             x:Name="View">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CurrentBlurFrameStyle" TargetType="Frame"
+                   BasedOn="{StaticResource SimpleCornerFrameStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource BlurLightColor}"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+
+            <Style x:Key="CurrentFrameStyle" TargetType="Frame"
+                   BasedOn="{StaticResource SimpleCornerFrameStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightColor}"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Frame Style="{StaticResource CurrentBlurFrameStyle}">
+            <Grid ColumnSpacing="0"
+                  RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Frame Style="{StaticResource CurrentFrameStyle}"
+                       HorizontalOptions="Start"
+                       Grid.Row="0">
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame"
+                                     Binding="{Binding Source={x:Reference TitleLabel}, Path=Text.Length}"
+                                     Value="0">
+                            <Setter Property="Frame.IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </Frame.Triggers>
+
+                    <Label x:Name="TitleLabel"
+                           Text="{Binding Source={x:Reference View}, Path=Title}"
+                           Style="{StaticResource BlurDarkSmallWrapLabelStyle}"/>
+                </Frame>
+
+                <Frame Style="{StaticResource CurrentFrameStyle}"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                       HasShadow="True"
+                       Grid.Row="1">
+                    <Grid x:Name="ChildViewPlace">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
