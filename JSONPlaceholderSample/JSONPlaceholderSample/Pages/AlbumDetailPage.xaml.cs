@@ -10,12 +10,12 @@ namespace JSONPlaceholderSample.Pages
 	public partial class AlbumDetailPage
     {
         private readonly Album _album;
-        private readonly AlbumDetailPageViewModel _viewModel;
+        private readonly AlbumDetailViewModel _viewModel;
 
 		public AlbumDetailPage (Album album)
 		{
 		    _album = album;
-            _viewModel = new AlbumDetailPageViewModel(album);
+            _viewModel = new AlbumDetailViewModel(album);
 
 		    BindingContext = _viewModel;
 
@@ -40,7 +40,16 @@ namespace JSONPlaceholderSample.Pages
                     Margin = 5,
                     HeightRequest = 75,
                     WidthRequest = 75,
-                    Source = ImageSource.FromUri(new Uri(photo.ThumbnailUrl))
+                    Source = ImageSource.FromUri(new Uri(photo.ThumbnailUrl)),
+                    /*GestureRecognizers =
+                    {
+                        new TapGestureRecognizer
+                        {
+                            NumberOfTapsRequired = 1,
+                            Command = _viewModel.PhotoEnlargingCommand,
+                            CommandParameter = photo
+                        }
+                    }*/
                 });
             }
         }

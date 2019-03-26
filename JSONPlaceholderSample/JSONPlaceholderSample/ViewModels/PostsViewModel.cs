@@ -1,6 +1,6 @@
 ﻿namespace JSONPlaceholderSample.ViewModels
 {
-    public class PostsPageViewModel : BaseViewModel
+    public class PostsViewModel : BaseViewModel
     {
         
     }

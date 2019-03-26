@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JSONPlaceholderSample.ViewModels
 {
-    public class UserDetailPageViewModel : BaseViewModel
+    public class UserDetailViewModel : BaseViewModel
     {
         public User User { get; set; }
         public int PostsCount { get; set; }
@@ -15,7 +15,7 @@ namespace JSONPlaceholderSample.ViewModels
 
         private bool _isInit;
 
-        public UserDetailPageViewModel(User user)
+        public UserDetailViewModel(User user)
         {
             User = user;
         }

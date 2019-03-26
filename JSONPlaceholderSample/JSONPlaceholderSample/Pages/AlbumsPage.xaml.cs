@@ -8,11 +8,11 @@ namespace JSONPlaceholderSample.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AlbumsPage
     {
-        private AlbumsPageViewModel _viewModel;
+        private AlbumsViewModel _viewModel;
 
         public AlbumsPage()
         {
-            _viewModel = new AlbumsPageViewModel();
+            _viewModel = new AlbumsViewModel();
 
             BindingContext = _viewModel;
 
@@ -21,7 +21,7 @@ namespace JSONPlaceholderSample.Pages
 
         public AlbumsPage(User user)
         {
-            _viewModel = new AlbumsPageViewModel(user);
+            _viewModel = new AlbumsViewModel(user);
 
             BindingContext = _viewModel;
 

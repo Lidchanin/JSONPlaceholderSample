@@ -8,12 +8,12 @@ namespace JSONPlaceholderSample.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UserDetailPage
     {
-        private readonly UserDetailPageViewModel _viewModel;
+        private readonly UserDetailViewModel _viewModel;
         private readonly User _user;
 
 		public UserDetailPage (User user)
 		{
-            _viewModel = new UserDetailPageViewModel(user);
+            _viewModel = new UserDetailViewModel(user);
 		    _user = user;
 
 		    BindingContext = _viewModel;

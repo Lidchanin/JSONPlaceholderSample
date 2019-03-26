@@ -8,11 +8,11 @@ namespace JSONPlaceholderSample.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class UsersPage
 	{
-	    private readonly UsersPageViewModel _viewModel;
+	    private readonly UsersViewModel _viewModel;
 
 		public UsersPage ()
 		{
-            _viewModel = new UsersPageViewModel();
+            _viewModel = new UsersViewModel();
 
 		    BindingContext = _viewModel;
 

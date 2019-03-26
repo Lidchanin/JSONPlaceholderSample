@@ -9,11 +9,11 @@ namespace JSONPlaceholderSample.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TodosPage
     {
-        private readonly TodosPageViewModel _viewModel;
+        private readonly TodosViewModel _viewModel;
 
 		public TodosPage ()
 		{
-            _viewModel = new TodosPageViewModel();
+            _viewModel = new TodosViewModel();
 
 		    BindingContext = _viewModel;
 
@@ -22,7 +22,7 @@ namespace JSONPlaceholderSample.Pages
 
 	    public TodosPage(User user)
 	    {
-            _viewModel = new TodosPageViewModel(user);
+            _viewModel = new TodosViewModel(user);
 
 	        BindingContext = _viewModel;
 

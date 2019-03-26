@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JSONPlaceholderSample.ViewModels
 {
-    public class AlbumsPageViewModel : BaseViewModel
+    public class AlbumsViewModel : BaseViewModel
     {
         public string PageTitle { get; set; }
         public ObservableCollection<Album> Albums { get; set; }
@@ -14,13 +14,13 @@ namespace JSONPlaceholderSample.ViewModels
         private bool _isInit;
         private readonly User _user;
 
-        public AlbumsPageViewModel()
+        public AlbumsViewModel()
         {
             _user = null;
             PageTitle = ConstantHelper.AllAlbums;
         }
 
-        public AlbumsPageViewModel(User user)
+        public AlbumsViewModel(User user)
         {
             _user = user;
             PageTitle = $"{_user.Username}'s albums";

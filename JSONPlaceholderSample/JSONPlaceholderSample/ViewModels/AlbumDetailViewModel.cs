@@ -1,25 +1,32 @@
-﻿using System.Collections.Generic;
-using JSONPlaceholderSample.Helpers;
+﻿using JSONPlaceholderSample.Helpers;
 using JSONPlaceholderSample.Models;
+using JSONPlaceholderSample.Pages.Popups;
 using Plugin.Connectivity;
+using Rg.Plugins.Popup.Services;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace JSONPlaceholderSample.ViewModels
 {
-    public class AlbumDetailPageViewModel : BaseViewModel
+    public class AlbumDetailViewModel : BaseViewModel
     {
         public string PageTitle { get; set; }
 
         public ObservableCollection<Photo> Photos { get; set; }
         public Album Album { get; set; }
 
+        //public ICommand PhotoEnlargingCommand { get; set; }
+
         private bool _isInit;
 
-        public AlbumDetailPageViewModel(Album album)
+        public AlbumDetailViewModel(Album album)
         {
             Album = album;
             PageTitle = album.Title;
+
+            //PhotoEnlargingCommand = new Command<Photo>(async (photo) => await PhotoEnlarging(photo));
         }
 
         public async Task InitData()
@@ -47,6 +54,9 @@ namespace JSONPlaceholderSample.ViewModels
             }
         }
 
-          
+        /*private async Task PhotoEnlarging(Photo photo)
+        {
+            await PopupNavigation.Instance.PushAsync(new PhotoDetailPage(photo, Photos));
+        }*/
     }
 }

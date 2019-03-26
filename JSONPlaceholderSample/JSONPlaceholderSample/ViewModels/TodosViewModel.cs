@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JSONPlaceholderSample.ViewModels
 {
-    public class TodosPageViewModel : BaseViewModel
+    public class TodosViewModel : BaseViewModel
     {
         public ObservableCollection<Todo> CompletedTodos { get; set; }
         public ObservableCollection<Todo> UnfinishedTodos { get; set; }
@@ -19,14 +19,14 @@ namespace JSONPlaceholderSample.ViewModels
         private bool _isInit;
         private readonly User _user;
 
-        public TodosPageViewModel()
+        public TodosViewModel()
         {
             _user = null;
             PageTitle = ConstantHelper.AllTodos;
             IsChangeEnabled = true;
         }
 
-        public TodosPageViewModel(User user)
+        public TodosViewModel(User user)
         {
             _user = user;
             PageTitle = $"{_user.Username}'s todos";
